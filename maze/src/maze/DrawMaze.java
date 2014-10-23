@@ -132,8 +132,8 @@ public class DrawMaze {
       //draw parameter of maze
       //g.drawLine(cellleft(0), celltop(0), cellleft(col), celltop(0));
      // g.drawLine(cellleft(0), celltop(0), cellleft(0), celltop(row));
-      g.drawLine(cellleft(0), celltop(row), cellleft(col), celltop(row));
-      g.drawLine(cellleft(col), celltop(0), cellleft(col), celltop(row));
+      //g.drawLine(cellleft(0), celltop(row), cellleft(col), celltop(row));
+      //g.drawLine(cellleft(col), celltop(0), cellleft(col), celltop(row));
 
       drawStart(MazeSolver.convert(MazeSolver.start_row), MazeSolver.convert(MazeSolver.start_col));
       drawEnd(MazeSolver.convert(MazeSolver.end_row), MazeSolver.convert(MazeSolver.end_col));  
@@ -155,8 +155,8 @@ public class DrawMaze {
       }
       //drawStart(MazeSolver.start_row, MazeSolver.start_col);
       //drawEnd(MazeSolver.end_row, MazeSolver.end_col);  
-      move(0, 0, 0, 1);
-      move(0, 1, 0, 2);
+      move(4, 0, 4, 2);
+      //move(0, 1, 0, 2);
       //drawStart(0, 0);
       //drawEnd(0, 2);
    }

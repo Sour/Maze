@@ -18,19 +18,19 @@ public class MazeSolver {
    static int end_col;
    static File inputFile;
    static String mazefile = "";
-   
+   static String[][] maze;
    
    public static void main(String[] args) throws FileNotFoundException {
 	   
 	   if (handleArguments(args)) {
 		 
 		 
-         String[][] maze = getMaze(mazefile);
+         maze = getMaze(mazefile);
          findStart(maze);
          findEnd(maze);
          DrawMaze.draw(row, col, maze);
          
-         if (solveMaze(maze))
+         if (solveMaze(start_row, start_col))
             System.out.println("Solved!");
          else
             System.out.println("Maze has no solution.");
@@ -105,13 +105,13 @@ public class MazeSolver {
 		   }
 	   }
 	   
-	   for(int r = 0; r < row; r++){
-		   for(int c = 0; c < col; c++){   
-			   if(maze[r][c].equals(" ") && r % 2 == 1 && c % 2 == 1){
-				   maze[r][c] = "0"; 
-			   }
-		   } 
-	   }
+	  // for(int r = 0; r < row; r++){
+	//	   for(int c = 0; c < col; c++){   
+		//	   if(maze[r][c].equals(" ") && r % 2 == 1 && c % 2 == 1){
+		//		   maze[r][c] = "0"; 
+		//	   }
+		 //  } 
+	  // }
 	   
 	   return maze;
    }
@@ -166,19 +166,104 @@ public class MazeSolver {
 			   count++;
 		   }
 	   }
-	   
 	   num = num - count;
 	   
 	   return num;
    }
    
    // Solve the maze.   
-   static boolean solveMaze(String[][] maze) {
+   static boolean solveMaze(int r, int c) {
+	   printMaze(maze);
+	   //start move position from start start_row, start_col
+	   if(maze[1][1].equals("E")){
+		   return true;
+	   }
 	   
-	   printMaze(maze);  
-       return false;
+	 //move up
+	   if(r > 1){
+		   
+		   if(!(maze[r-1][c].equals("-")) || (maze[r-2][c].equals("x"))){
+			   
+			   DrawMaze.move(convert(r), convert(c), convert(r-1), convert(c));
+			   solveMaze(r-2, c);
+			   //return true;
+		   }
+	   }
+	   //move down 
+	   if (r < MazeSolver.row){
+		   if(!(maze[r+1][c].equals("-")) || (maze[r+1][c].equals("x"))){
+			   
+			   DrawMaze.move(r, c, r, c+1);
+			   solveMaze(r+2, c);
+			   //return true;
+		   }
+	   }
+		   
+	   //move right
+	   if(c < MazeSolver.col){
+		   if(!(maze[r][c+1].equals("-")) || (maze[r][c+2].equals("x"))){
+			   
+			   DrawMaze.move(r, c, r, c+1);
+			   solveMaze(r, c+2);
+			   //return true;
+		   }
+	   }
+	   //move left
+	   if(c > 1){   
+		   if(!(maze[r][c-1].equals("-")) || (maze[r][c-2].equals("x"))){
+			   
+	           DrawMaze.move(r, c, r, c-1);
+	           solveMaze(r, c-2);
+			   //return true; 
+		   }
+	   }
+	   
+	   return false;
+			   
+		  
+		
+		   
+		   
+	   //try move in all directions (up down left right) 
+	   //if move lands on empty element then canMove is true
+	   //else move is false
+	   //if move lands on End then solveMaze = true
+	   //printMaze(maze);  
+      
        
+       
+	   
+   
+	   
+   
    }
    
-  
+   /*static boolean canMove(int r, int c){
+	   //move up
+	   if(!(maze[r-1][c].equals("-")) || (maze[r-2][c].equals("x"))){
+		   
+		   DrawMaze.move(r, c, r-2, c);
+		   return true;
+	   }
+	   //move down   
+	   if(!(maze[r+2][c].equals("-") || (maze[r+2][c].equals("|")))){
+		   
+		   DrawMaze.move(r, c, r, c+2);
+		   return true;
+	   }
+		   
+	   //move right
+	   if(!(maze[r][c+2].equals("-") || (maze[r][c+2].equals("|")))){
+		   
+		   DrawMaze.move(r, c, r, c+2);
+		   return true;
+	   }
+		   
+	   if(!(maze[r][c-2].equals("-") || (maze[r][c-2].equals("|")))){
+		   
+           DrawMaze.move(r, c, r, c-2);
+		   return true; 
+	   }
+	   else return false;
+   }*/
 }
