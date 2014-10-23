@@ -104,6 +104,15 @@ public class MazeSolver {
 			   charCount += 1;
 		   }
 	   }
+	   
+	   for(int r = 0; r < row; r++){
+		   for(int c = 0; c < col; c++){   
+			   if(maze[r][c].equals(" ") && r % 2 == 1 && c % 2 == 1){
+				   maze[r][c] = "0"; 
+			   }
+		   } 
+	   }
+	   
 	   return maze;
    }
    
@@ -166,26 +175,8 @@ public class MazeSolver {
    // Solve the maze.   
    static boolean solveMaze(String[][] maze) {
 	   
-	   for(int r = 0; r < row; r++){
-		   for(int c = 0; c < col; c++){   
-			   if(maze[r][c].equals(" ") && r % 2 == 1 && c % 2 == 1){
-				   maze[r][c] = "0"; 
-			   }
-		   } 
-	   }
-	   
-	    
 	   printMaze(maze);  
        return false;
-       
-       //test git push
-       
-       
-       
-       
-       
-       
-       
        
    }
    
