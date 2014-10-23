@@ -135,13 +135,13 @@ public class DrawMaze {
       //g.drawLine(cellleft(0), celltop(row), cellleft(col), celltop(row));
       //g.drawLine(cellleft(col), celltop(0), cellleft(col), celltop(row));
 
-      drawStart(MazeSolver.convert(MazeSolver.start_row), MazeSolver.convert(MazeSolver.start_col));
-      drawEnd(MazeSolver.convert(MazeSolver.end_row), MazeSolver.convert(MazeSolver.end_col));  
+      drawStart(((MazeSolver.start_row/2)-1), ((MazeSolver.start_col/2)));
+      drawEnd(((MazeSolver.end_row/2)-1), ((MazeSolver.end_col/2)));  
       
       for(int c = 0; c < MazeSolver.col; c++){
     	  for(int r= 0; r < MazeSolver.row; r++){
     		  if(maze[r][c].equals("|")){
-    			  g.drawLine(cellleft((c/2)), celltop(MazeSolver.convert(r)), cellleft(c/2), celltop(MazeSolver.convert(r+1)));
+    			  g.drawLine(cellleft((c/2)), celltop((r/2)), cellleft(c/2), celltop(((r/2)-1)));
     		  }
     	  }
       }
@@ -149,7 +149,7 @@ public class DrawMaze {
       for(int r = 0; r < MazeSolver.row; r++){
     	  for(int c= 0; c < MazeSolver.col; c++){
     		  if(maze[r][c].equals("-")){
-    			  g.drawLine(cellleft(MazeSolver.convert(c)), celltop(r/2), cellleft(MazeSolver.convert(c)+1), celltop(MazeSolver.convert(r)));
+    			  g.drawLine(cellleft((c/2)), celltop((r/2)-1), cellleft((c/2)+1), celltop((r/2)-1));
     		  }
     	  }
       }
